@@ -21,9 +21,7 @@ public class CountupActivity extends AppCompatActivity implements SensorEventLis
     private Button finishCountingButton;
     int numberOfPushups=0;
     Intent iFinishCounting;
-//    SharedPreferences prefRecentPushupCount ;
-//    SharedPreferences.Editor editorPrefRecentCountEditor;
-//    public static final String RECENT_PUSHUP_COUNT_PREFS = "com.parmu.pushupcounter.RecentPushupCount";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
