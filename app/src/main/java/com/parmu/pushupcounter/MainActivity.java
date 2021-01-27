@@ -3,63 +3,36 @@ package com.parmu.pushupcounter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
-    private SensorManager mSensorManager;
-    private Sensor mProximitySensor;
-    private TextView counterTextView;
-    private Button startCounterButton;
+public class MainActivity extends AppCompatActivity{
+    int numberOfPushups;
+    TextView recentPushupsTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        counterTextView = findViewById(R.id.text_view_counter);
-        startCounterButton = findViewById(R.id.button_start_counter);
-
-        mSensorManager= (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mProximitySensor= mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        recentPushupsTextView = findViewById(R.id.text_view_count_display);
+        Button startCounterButton = findViewById(R.id.button_start_counter);
+        startCounterButton.setOnClickListener(v -> {
+            Intent iCountup = new Intent(MainActivity.this, CountupActivity.class);
+            startActivity(iCountup);
+        });
+        //numberof pushups got from countup activity as intentextra
+        numberOfPushups =  getIntent().getIntExtra("numberofpushups",0);
+        recentPushupsTextView.setText(String.valueOf(numberOfPushups));
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        //Do something with sensor data
-        if(event.sensor.getType()==Sensor.TYPE_PROXIMITY){
-            if(event.values[0]< mProximitySensor.getMaximumRange()){
-                //Near
-                Toast.makeText(getApplicationContext(),"Near", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                //Far
-                Toast.makeText(getApplicationContext(),"Far",Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        //Do here something if accuracy changes
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //register a listener for sensor
-        mSensorManager.registerListener(this,mProximitySensor,SensorManager.SENSOR_DELAY_NORMAL);
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //unregister the listener when activity pauses
-        mSensorManager.unregisterListener(this);
-    }
 }
