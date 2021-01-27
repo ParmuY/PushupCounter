@@ -11,6 +11,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         recentPushupsTextView = findViewById(R.id.text_view_count_display);
+        ImageButton refreshButton = findViewById(R.id.button_refresh);
+        refreshButton.setOnClickListener(v -> {numberOfPushups=0; recentPushupsTextView.setText(String.valueOf(numberOfPushups));  });
         Button startCounterButton = findViewById(R.id.button_start_counter);
         startCounterButton.setOnClickListener(v -> {
             Intent iCountup = new Intent(MainActivity.this, CountupActivity.class);

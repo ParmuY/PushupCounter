@@ -19,7 +19,7 @@ public class CountupActivity extends AppCompatActivity implements SensorEventLis
     private Sensor mProximitySensor;
     private TextView liveCountTextView;
     private Button finishCountingButton;
-    int numberOfPushups=0;
+    int numberOfPushups= -1;
     Intent iFinishCounting;
 
 
@@ -55,10 +55,7 @@ public class CountupActivity extends AppCompatActivity implements SensorEventLis
                     numberOfPushups++;
                     liveCountTextView.setText(String.valueOf(numberOfPushups));
                 }
-                else{
-                    //Near
-                    Toast.makeText(getApplicationContext(),"Near",Toast.LENGTH_SHORT).show();
-                }
+
             }
         }
     }
