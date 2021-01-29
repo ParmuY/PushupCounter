@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <nl.dionsegijn.konfetti.KonfettiView
+        android:id="@+id/view_konfetti"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/picture_pushup"
         android:layout_width="250dp"
@@ -53,5 +58,8 @@
         app:layout_constraintStart_toEndOf="@+id/button_start_counter"
         app:layout_constraintTop_toTopOf="@+id/button_start_counter"
         tools:ignore="MissingConstraints" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
