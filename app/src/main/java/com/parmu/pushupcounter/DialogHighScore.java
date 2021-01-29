@@ -20,6 +20,7 @@ public class DialogHighScore extends AppCompatDialogFragment {
         View dialogView = LayoutInflater.from(getActivity()).inflate(R.layout.custom_dialog_box_view,viewGroup,false);
         dialogBuilder.setView(dialogView)
                 .setCancelable(true);
+
         return dialogBuilder.create();
     }
 }

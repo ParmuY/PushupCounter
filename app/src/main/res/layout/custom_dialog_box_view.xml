@@ -5,25 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#28000000"
+    android:background="#00666666"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00666666"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center_horizontal"
         android:text="@string/high_score"
         android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
+        android:textColor="#FFC107"
         android:textSize="50sp"
-        android:fontFamily="sans-serif-black"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.237"
-        tools:ignore="MissingConstraints"
-        android:gravity="center_horizontal"
-        android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
-        android:textColor="#8C53F1"/>
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity{
      
     private void displayHighScore() {
         SharedPreferences prefIsFirstRun = getSharedPreferences("com.parmu.pushupcounter.isfirstrun", MODE_PRIVATE);
-        Boolean isFirstRun = prefIsFirstRun.getBoolean("isfirstrun", true);
+        boolean isFirstRun = prefIsFirstRun.getBoolean("isfirstrun", true);
         if (isFirstRun) {
             SharedPreferences.Editor editorIsFirstRun = prefIsFirstRun.edit();
             editorIsFirstRun.putBoolean("isfirstrun", false).apply();
