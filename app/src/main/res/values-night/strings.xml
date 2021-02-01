@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="high_score">High Score</string>
+    <string name="about_app">About</string>
+    <string name="pushup_counter">PushUp Counter</string>
+    <string name="rate_app">Rate app</string>
+    <string name="share_app">Share</string>
 </resources>

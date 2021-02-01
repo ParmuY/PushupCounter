@@ -1,15 +1,26 @@
 package com.parmu.pushupcounter;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.graphics.Color;
+import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,13 +36,16 @@ public class MainActivity extends AppCompatActivity{
     final static String PREF_HIGH_SCORE_FILE_NAME = "com.parmu.pushupcounter.HighScore";
     SharedPreferences prefHighScore;
     private int highScore;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ActionBar actionBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        hamburgerToolbarActionBar();
         prefHighScore = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME,MODE_PRIVATE);
         highScore = prefHighScore.getInt("highscore",0);
         recentPushupsTextView = findViewById(R.id.text_view_count_display);
@@ -47,7 +61,16 @@ public class MainActivity extends AppCompatActivity{
         recentPushupsTextView.setText(String.valueOf(numberOfPushups));
         displayHighScore();
     }
-     
+
+    // when hamberger is clicked  then drawer opens
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void displayHighScore() {
         SharedPreferences prefIsFirstRun = getSharedPreferences("com.parmu.pushupcounter.isfirstrun", MODE_PRIVATE);
         boolean isFirstRun = prefIsFirstRun.getBoolean("isfirstrun", true);
@@ -85,7 +108,42 @@ public class MainActivity extends AppCompatActivity{
                 dialog.dismiss();
                 timerDismissDialog.cancel();
             }
-        },5000);
+        },4000);
+    }
+    @SuppressLint("NonConstantResourceId")
+    private void hamburgerToolbarActionBar(){
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Pushup Counter");
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigationView);
+        actionBar = getSupportActionBar();
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_hamburger_menu);
+
+        //listener for navigation item click
+        navigationView.setNavigationItemSelectedListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                case R.id.share_drawer:
+                    menuItem.setChecked(false);
+                    Toast.makeText(getApplicationContext(), "Share app", Toast.LENGTH_SHORT).show();
+                    drawerLayout.closeDrawers();
+                    return true;
+                case R.id.rate:
+                    menuItem.setChecked(false);
+                    Toast.makeText(getApplicationContext(), "Rate", Toast.LENGTH_SHORT).show();
+                    drawerLayout.closeDrawers();
+                    return true;
+                case R.id.about:
+                    menuItem.setChecked(false);
+                    Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT).show();
+                    drawerLayout.closeDrawers();
+                    return true;
+            }
+            return true;
+        });
     }
 
 }
