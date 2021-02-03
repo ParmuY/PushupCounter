@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".CountupActivity">
 
-<include
-    layout="@layout/toolbar_layout"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout"/>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/counter_activity_picture_pushup"
         android:layout_width="126dp"

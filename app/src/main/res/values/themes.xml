@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.PushupCounter" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#FF5722</item>
-        <item name="colorPrimaryVariant">#A32B05</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryVariant">@color/color_primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+    <style name="NavigationTheme">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
     </resources>

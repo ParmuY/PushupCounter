@@ -6,25 +6,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.graphics.Color;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import nl.dionsegijn.konfetti.KonfettiView;
 import nl.dionsegijn.konfetti.models.Shape;
 import nl.dionsegijn.konfetti.models.Size;
@@ -39,12 +44,22 @@ public class MainActivity extends AppCompatActivity{
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ActionBar actionBar;
+    private AdView mAdView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Initialize the Mobile Ads SDK
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                Toast.makeText(MainActivity.this, " sucessfull initi ", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        admobBanner();
         hamburgerToolbarActionBar();
         prefHighScore = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME,MODE_PRIVATE);
         highScore = prefHighScore.getInt("highscore",0);
@@ -60,6 +75,17 @@ public class MainActivity extends AppCompatActivity{
         numberOfPushups =  getIntent().getIntExtra("numberofpushups",0);
         recentPushupsTextView.setText(String.valueOf(numberOfPushups));
         displayHighScore();
+    }
+
+    private void admobBanner() {
+        mAdView = findViewById(R.id.adView);
+        //remove this code for release
+        MobileAds.setRequestConfiguration(
+                new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("1B17F2F74B21C1CC8F0D69FD617DFA0E"))
+                        .build());
+        //remove the code above when releasing
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     // when hamberger is clicked  then drawer opens
@@ -144,6 +170,25 @@ public class MainActivity extends AppCompatActivity{
             }
             return true;
         });
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(mAdView!=null){mAdView.resume();
+        }
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        if(mAdView!=null){
+            mAdView.pause(); }
+    }
+    @Override
+    public void onDestroy(){
+        if(mAdView!=null){
+            mAdView.destroy();
+            super.onDestroy();
+        }
     }
 
 }
