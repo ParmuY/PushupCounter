@@ -103,7 +103,8 @@ public class MainActivity extends AppCompatActivity{
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.situp_counter:
-
+                Intent iToSitupActivity = new Intent(MainActivity.this,SitupActivity.class);
+                startActivity(iToSitupActivity);
                 return true;
         }
         return super.onOptionsItemSelected(item);
