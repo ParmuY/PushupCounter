@@ -19,13 +19,13 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         Intent mIntent = new Intent(SplashActivity.this,MainActivity.class);
-//        Timer timerSplash = new Timer();
-//        timerSplash.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                startActivity(mIntent);
-//            }
-//        },5000);
+        Timer timerSplash = new Timer();
+        timerSplash.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                startActivity(mIntent);
+            }
+        },7000);
         FloatingActionButton floatingActionButton = findViewById(R.id.fab_splash_screen);
         floatingActionButton.setOnClickListener(view -> {
             startActivity(mIntent);

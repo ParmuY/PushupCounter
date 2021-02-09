@@ -7,5 +7,5 @@
     <string name="share_app">Share</string>
     <!--    <string name="admob_banner_id">ca-app-pub-7368351753880084/2538780659</string>-->
     <string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="splash_instruction_mobile_placement">Place your Phone below your chest or Head</string>
+    <string name="splash_instruction_mobile_placement">Tips: Place your phone below your chest or Head</string>
 </resources>

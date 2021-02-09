@@ -10,6 +10,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -87,13 +89,22 @@ public class MainActivity extends AppCompatActivity{
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu,menu);
+        return true;
+    }
     // when hamberger is clicked  then drawer opens
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            drawerLayout.openDrawer(GravityCompat.START);
-            return true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.situp_counter:
+
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -137,6 +148,7 @@ public class MainActivity extends AppCompatActivity{
         },4000);
     }
     @SuppressLint("NonConstantResourceId")
+
     private void hamburgerToolbarActionBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -190,5 +202,6 @@ public class MainActivity extends AppCompatActivity{
             super.onDestroy();
         }
     }
+
 
 }
