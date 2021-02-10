@@ -32,7 +32,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/situp_finish_counting"
+        android:id="@+id/squat_finish_counting"
         android:layout_width="200dp"
         android:layout_height="80dp"
         android:layout_marginBottom="60dp"
@@ -53,7 +53,7 @@
         android:layout_marginBottom="52dp"
         android:indeterminateTint="#AF92E3"
         android:progress="100"
-        app:layout_constraintBottom_toTopOf="@+id/situp_finish_counting"
+        app:layout_constraintBottom_toTopOf="@+id/squat_finish_counting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />

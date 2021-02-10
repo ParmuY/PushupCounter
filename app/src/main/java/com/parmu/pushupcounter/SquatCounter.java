@@ -22,7 +22,7 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     private int numberOfSquat =-1;
     private TextView liveSquatCount;
     private float pitch;
-    private Intent iFinishCountingOfSquat;
+    Intent iFinishCountingOfSquat;
     private float recentValueOfPitch= (float) 0.80;
     private float[] mAccelerometerData = new float[3];
     private float[] mMagnetometerData = new float[3];
@@ -39,9 +39,10 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         liveSquatCount = findViewById(R.id.squat_live_count);
-        Button finishCountOfSitupButton = findViewById(R.id.button_finish_counting);
-        finishCountOfSitupButton.setOnClickListener(v->{
-             iFinishCountingOfSquat = new Intent(SquatCounter.this, SquatActivity.class);
+        Button finishCountOfSquatButton = findViewById(R.id.squat_finish_counting);
+        finishCountOfSquatButton.setOnClickListener(v->{
+            iFinishCountingOfSquat = new Intent(SquatCounter.this, SquatActivity.class);
+            iFinishCountingOfSquat.putExtra("numberofsquat", numberOfSquat);
             startActivity(iFinishCountingOfSquat);
         });
 

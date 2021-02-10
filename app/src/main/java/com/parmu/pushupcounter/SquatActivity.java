@@ -14,7 +14,7 @@ public class SquatActivity extends AppCompatActivity {
     private  SharedPreferences prefHighScoreOfSquat;
     private int highScoreSquat;
     private TextView recentSquatTextView;
-    private int numberOfSquat;
+     int numberOfSquat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
