@@ -4,6 +4,6 @@
     <item android:id="@+id/situp_counter"
         android:title="Situps Counter"
         app:showAsAction="always"
-        android:icon="@drawable/lightbulb_on_outline"
+        android:icon="@drawable/squat_img_300x416"
         />
 </menu>

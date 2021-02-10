@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SquatActivity">
+    <include
+        layout="@layout/toolbar_layout"
+        android:id="toolbar"/>
+
+    <nl.dionsegijn.konfetti.KonfettiView
+        android:id="@+id/view_konfetti"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="53dp" />
+
+    <ImageView
+        android:layout_width="260dp"
+        android:layout_height="273dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/squat_img_300x416"
+        app:layout_constraintBottom_toTopOf="@+id/situp_count_display"
+        app:layout_constraintEnd_toEndOf="@+id/view_konfetti"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="@+id/view_konfetti" />
+
+    <TextView
+        android:id="@+id/situp_count_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="999"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/start_situp_counter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/start_situp_counter"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginBottom="52dp"
+        android:text="Start"
+        android:textSize="30sp"
+        app:backgroundTint="#9C27B0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/view_konfetti"
+        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/situp_refresh"
+        android:layout_width="53dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginBottom="68dp"
+        android:background="#22000000"
+        android:src="@drawable/ic_baseline_refresh"
+        android:tint="#9C27B0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/start_situp_counter"
+         />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

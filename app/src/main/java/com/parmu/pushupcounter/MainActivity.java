@@ -1,6 +1,5 @@
 package com.parmu.pushupcounter;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,10 +18,8 @@ import android.widget.TextView;
 import android.graphics.Color;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -96,6 +93,7 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }
     // when hamberger is clicked  then drawer opens
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -103,7 +101,7 @@ public class MainActivity extends AppCompatActivity{
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.situp_counter:
-                Intent iToSitupActivity = new Intent(MainActivity.this,SitupActivity.class);
+                Intent iToSitupActivity = new Intent(MainActivity.this, SquatActivity.class);
                 startActivity(iToSitupActivity);
                 return true;
         }

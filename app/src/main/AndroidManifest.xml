@@ -11,12 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PushupCounter"
         tools:ignore="AllowBackup">
-        <activity android:name=".SitupActivity"></activity>
-
+        <activity android:name=".SquatCounter"></activity>
+        <activity android:name=".SquatActivity" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CountupActivity"
             android:screenOrientation="portrait" />
@@ -29,12 +28,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
