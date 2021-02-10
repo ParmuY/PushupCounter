@@ -21,15 +21,15 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     private Sensor mSensorMagnetometer;
     private int numberOfSquat =-1;
     private TextView liveSquatCount;
-    float pitch;
+    private float pitch;
     private Intent iFinishCountingOfSquat;
-    float recentValueOfPitch= (float) 0.80;
+    private float recentValueOfPitch= (float) 0.80;
     private float[] mAccelerometerData = new float[3];
     private float[] mMagnetometerData = new float[3];
     final static String PREF_HIGH_SCORE_FILE_NAME_2 = "com.parmu.pushupcounter.HighScore";
-    SharedPreferences prefHighScoreOfSquat;
-    SharedPreferences.Editor editorHighScoreOfSquat;
-    int highScoreSquat;
+    private SharedPreferences prefHighScoreOfSquat;
+    private SharedPreferences.Editor editorHighScoreOfSquat;
+    private int highScoreSquat;
 
 
     @Override
@@ -135,7 +135,7 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     protected void onRestart() {
         super.onRestart();
         mSensorManager.unregisterListener(this);
-//        //if paused then back to squatActivity with the result
+//      if paused then back to squatActivity with the result
         iFinishCountingOfSquat = new Intent(SquatCounter.this, SquatActivity.class);
         iFinishCountingOfSquat.putExtra("numberofsquat", numberOfSquat);
         highScoreSetting();

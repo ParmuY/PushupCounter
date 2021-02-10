@@ -35,14 +35,14 @@ import nl.dionsegijn.konfetti.models.Size;
 
 
 public class MainActivity extends AppCompatActivity{
-    int numberOfPushups;
-    TextView recentPushupsTextView;
+    private int numberOfPushups;
+    private TextView recentPushupsTextView;
     final static String PREF_HIGH_SCORE_FILE_NAME = "com.parmu.pushupcounter.HighScore";
-    SharedPreferences prefHighScore;
+    private SharedPreferences prefHighScore;
     private int highScore;
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    ActionBar actionBar;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private ActionBar actionBar;
     private AdView mAdView;
 
 
