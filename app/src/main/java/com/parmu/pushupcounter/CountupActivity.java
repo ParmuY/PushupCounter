@@ -89,13 +89,12 @@ public class CountupActivity extends AppCompatActivity implements SensorEventLis
         //unregister the listener when activity pauses
         mProximitySensor = null;
         mSensorManager.unregisterListener(this);
-
-
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        mSensorManager.unregisterListener(this);
         //if paused then back to mainactivity with the result
         iFinishCounting = new Intent(CountupActivity.this, MainActivity.class);
         iFinishCounting.putExtra("numberofpushups", numberOfPushups);

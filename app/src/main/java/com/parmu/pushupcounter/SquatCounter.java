@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -18,15 +19,17 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     private SensorManager mSensorManager;
     private Sensor mSensorAccelerometer;
     private Sensor mSensorMagnetometer;
-    private TextView mTextSensorAzimuth;
-    private TextView mTextSensorPitch;
-    private TextView mTextSensorRoll;
-    private int numberOfSitups =-1;
-    TextView liveSitupCount;
+    private int numberOfSquat =-1;
+    private TextView liveSquatCount;
     float pitch;
+    private Intent iFinishCountingOfSquat;
     float recentValueOfPitch= (float) 0.80;
     private float[] mAccelerometerData = new float[3];
     private float[] mMagnetometerData = new float[3];
+    final static String PREF_HIGH_SCORE_FILE_NAME_2 = "com.parmu.pushupcounter.HighScore";
+    SharedPreferences prefHighScoreOfSquat;
+    SharedPreferences.Editor editorHighScoreOfSquat;
+    int highScoreSquat;
 
 
     @Override
@@ -35,12 +38,11 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_squat_counter);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        liveSitupCount = findViewById(R.id.textview_live_situp_count);
-        mTextSensorPitch =  findViewById(R.id.value_pitch);
+        liveSquatCount = findViewById(R.id.squat_live_count);
         Button finishCountOfSitupButton = findViewById(R.id.button_finish_counting);
         finishCountOfSitupButton.setOnClickListener(v->{
-            Intent iFinishCountingOfSitups = new Intent(SquatCounter.this, SquatActivity.class);
-            startActivity(iFinishCountingOfSitups);
+             iFinishCountingOfSquat = new Intent(SquatCounter.this, SquatActivity.class);
+            startActivity(iFinishCountingOfSquat);
         });
 
         mSensorManager = (SensorManager) getSystemService(
@@ -77,15 +79,14 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
 
         float roll = orientationValues[2];
         //here start the main or important code
-        if(pitch<0.70 && recentValueOfPitch>0.70){
-            numberOfSitups++;
-            liveSitupCount.setText(String.valueOf(numberOfSitups));
+        if(pitch<0.60 && recentValueOfPitch>0.60){
+            numberOfSquat++;
+            liveSquatCount.setText(String.valueOf(numberOfSquat));
             recentValueOfPitch = pitch;
         }
-        if(pitch > 0.70 && recentValueOfPitch < 0.70){
+        if(pitch > 0.60 && recentValueOfPitch < 0.60){
             recentValueOfPitch = pitch;
         }
-        mTextSensorPitch.setText(String.valueOf(pitch));
 
     }
 
@@ -93,15 +94,20 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+    private void highScoreSetting(){
+        prefHighScoreOfSquat = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME_2,MODE_PRIVATE);
+        highScoreSquat = prefHighScoreOfSquat.getInt("squathighscore",0);
+        editorHighScoreOfSquat = prefHighScoreOfSquat.edit();
+        if(numberOfSquat > highScoreSquat){
+            highScoreSquat = numberOfSquat;
+            editorHighScoreOfSquat.putInt("squathighscore", highScoreSquat);
+            editorHighScoreOfSquat.apply();
+        }
+    }
+
     @Override
-    protected void onStart() {
-        super.onStart();
-        // Listeners for the sensors are registered in this callback and
-        // can be unregistered in onStop().
-        //
-        // Check to ensure sensors are available before registering listeners.
-        // Both listeners are registered with a "normal" amount of delay
-        // (SENSOR_DELAY_NORMAL).
+    protected void onResume() {
+        super.onResume();
         if (mSensorAccelerometer != null) {
             mSensorManager.registerListener(this, mSensorAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         }
@@ -112,10 +118,27 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        //unregister the listener when activity pauses
+        mSensorManager.unregisterListener(this);
+    }
+    @Override
     protected void onStop() {
         super.onStop();
         // Unregister all sensor listeners in this callback so they don't
         // continue to use resources when the app is stopped.
         mSensorManager.unregisterListener(this);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mSensorManager.unregisterListener(this);
+//        //if paused then back to squatActivity with the result
+        iFinishCountingOfSquat = new Intent(SquatCounter.this, SquatActivity.class);
+        iFinishCountingOfSquat.putExtra("numberofsquat", numberOfSquat);
+        highScoreSetting();
+        startActivity(iFinishCountingOfSquat);
     }
 }

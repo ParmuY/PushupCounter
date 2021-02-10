@@ -22,13 +22,13 @@
         android:layout_height="273dp"
         android:layout_marginBottom="24dp"
         android:src="@drawable/squat_img_300x416"
-        app:layout_constraintBottom_toTopOf="@+id/situp_count_display"
+        app:layout_constraintBottom_toTopOf="@+id/squat_count_display"
         app:layout_constraintEnd_toEndOf="@+id/view_konfetti"
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="@+id/view_konfetti" />
 
     <TextView
-        android:id="@+id/situp_count_display"
+        android:id="@+id/squat_count_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/situp_refresh"
+        android:id="@+id/squat_refresh"
         android:layout_width="53dp"
         android:layout_height="48dp"
         android:layout_marginEnd="36dp"
