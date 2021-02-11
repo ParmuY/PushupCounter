@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity{
                         .streamFor(300, 3000L);
                         openDialog();
             }
-
         }
     }
     public void openDialog(){

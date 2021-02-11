@@ -48,26 +48,25 @@
         android:layout_height="80dp"
         android:layout_marginStart="104dp"
         android:layout_marginLeft="104dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="64dp"
         android:text="Start"
         android:textSize="30sp"
         app:backgroundTint="#9C27B0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/view_konfetti"
-        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/squat_refresh"
         android:layout_width="53dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="72dp"
         android:background="#22000000"
         android:src="@drawable/ic_baseline_refresh"
         android:tint="#9C27B0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toEndOf="@+id/start_situp_counter" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
