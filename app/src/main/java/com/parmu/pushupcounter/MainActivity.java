@@ -1,5 +1,6 @@
 package com.parmu.pushupcounter;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -24,6 +25,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Arrays;
@@ -44,9 +46,6 @@ public class MainActivity extends AppCompatActivity{
     private NavigationView navigationView;
     private ActionBar actionBar;
     private AdView mAdView;
-    private TextView vForTest;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity{
                 Toast.makeText(MainActivity.this, " sucessfull initi ", Toast.LENGTH_SHORT).show();
             }
         });
-
+        bottomNavigation();
         admobBanner();
         hamburgerToolbarActionBar();
         prefHighScore = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME,MODE_PRIVATE);
@@ -88,12 +87,7 @@ public class MainActivity extends AppCompatActivity{
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu,menu);
-        return true;
-    }
+
     // when hamberger is clicked  then drawer opens
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -101,10 +95,6 @@ public class MainActivity extends AppCompatActivity{
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-            case R.id.situp_counter:
-                Intent iToSitupActivity = new Intent(MainActivity.this, SquatActivity.class);
-                startActivity(iToSitupActivity);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -182,6 +172,30 @@ public class MainActivity extends AppCompatActivity{
                     return true;
             }
             return true;
+        });
+    }
+
+    private void bottomNavigation(){
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.pushup_item:
+                        Intent iPushup = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(iPushup);
+                        return true;
+                    case R.id.squat_item:
+                        Intent iSquat = new Intent(getApplicationContext(), SquatActivity.class);
+                        startActivity(iSquat);
+                    case R.id.more_item:
+                        Toast.makeText(getApplicationContext(),"more settings",Toast.LENGTH_SHORT).show();
+
+
+                }
+                return false;
+            }
         });
     }
     @Override
