@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity{
     private NavigationView navigationView;
     private ActionBar actionBar;
     private AdView mAdView;
+    private TextView vForTest;
+
 
 
     @Override
