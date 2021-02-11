@@ -14,10 +14,13 @@
         android:theme="@style/Theme.PushupCounter"
         tools:ignore="AllowBackup">
         <activity android:name=".SquatCounter"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:noHistory="true">
         </activity>
+
         <activity android:name=".SquatActivity"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
@@ -27,9 +30,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".CountupActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:noHistory="true"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
