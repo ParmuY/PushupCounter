@@ -27,8 +27,8 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     private float[] mAccelerometerData = new float[3];
     private float[] mMagnetometerData = new float[3];
     final static String PREF_HIGH_SCORE_FILE_NAME_2 = "com.parmu.pushupcounter.HighScore";
-    private SharedPreferences prefHighScoreOfSquat;
-    private SharedPreferences.Editor editorHighScoreOfSquat;
+    private SharedPreferences prefHighScoreSquat;
+    private SharedPreferences.Editor editorHighScoreSquat;
     private int highScoreSquat;
 
 
@@ -43,6 +43,7 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
         finishCountOfSquatButton.setOnClickListener(v->{
             iFinishCountingOfSquat = new Intent(SquatCounter.this, SquatActivity.class);
             iFinishCountingOfSquat.putExtra("numberofsquat", numberOfSquat);
+            highScoreSetting();
             startActivity(iFinishCountingOfSquat);
         });
 
@@ -95,16 +96,6 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-    private void highScoreSetting(){
-        prefHighScoreOfSquat = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME_2,MODE_PRIVATE);
-        highScoreSquat = prefHighScoreOfSquat.getInt("squathighscore",0);
-        editorHighScoreOfSquat = prefHighScoreOfSquat.edit();
-        if(numberOfSquat > highScoreSquat){
-            highScoreSquat = numberOfSquat;
-            editorHighScoreOfSquat.putInt("squathighscore", highScoreSquat);
-            editorHighScoreOfSquat.apply();
-        }
-    }
 
     @Override
     protected void onResume() {
@@ -136,10 +127,21 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     protected void onRestart() {
         super.onRestart();
         mSensorManager.unregisterListener(this);
+        highScoreSetting();
 //      if paused then back to squatActivity with the result
         iFinishCountingOfSquat = new Intent(SquatCounter.this, SquatActivity.class);
         iFinishCountingOfSquat.putExtra("numberofsquat", numberOfSquat);
-        highScoreSetting();
         startActivity(iFinishCountingOfSquat);
+    }
+
+        private void highScoreSetting(){
+        prefHighScoreSquat = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME_2,MODE_PRIVATE);
+        highScoreSquat = prefHighScoreSquat.getInt("squathighscore",0);
+        editorHighScoreSquat = prefHighScoreSquat.edit();
+        if(numberOfSquat > highScoreSquat){
+            highScoreSquat= numberOfSquat;
+            editorHighScoreSquat.putInt("squathighscore",highScoreSquat);
+            editorHighScoreSquat.apply();
+        }
     }
 }

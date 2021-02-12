@@ -52,11 +52,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Initialize the Mobile Ads SDK
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-                Toast.makeText(MainActivity.this, " sucessfull initi ", Toast.LENGTH_SHORT).show();
-            }
+        MobileAds.initialize(this, initializationStatus -> {
         });
         bottomNavigation();
         admobBanner();
@@ -135,7 +131,7 @@ public class MainActivity extends AppCompatActivity{
                 dialog.dismiss();
                 timerDismissDialog.cancel();
             }
-        },4000);
+        },3000);
     }
     @SuppressLint("NonConstantResourceId")
 
@@ -182,18 +178,24 @@ public class MainActivity extends AppCompatActivity{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.pushup_item:
+                        item.setChecked(true);
+                        item.setEnabled(true);
                         Intent iPushup = new Intent(getApplicationContext(), MainActivity.class);
+                        iPushup.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(iPushup);
                         return true;
                     case R.id.squat_item:
+                        item.setChecked(true);
                         Intent iSquat = new Intent(getApplicationContext(), SquatActivity.class);
+                        iSquat.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(iSquat);
                     case R.id.more_item:
+                        item.setChecked(true);
                         Toast.makeText(getApplicationContext(),"more settings",Toast.LENGTH_SHORT).show();
 
 
                 }
-                return false;
+                return true;
             }
         });
     }
@@ -206,6 +208,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public void onPause(){
         super.onPause();
+        overridePendingTransition(0,0);
         if(mAdView!=null){
             mAdView.pause(); }
     }
