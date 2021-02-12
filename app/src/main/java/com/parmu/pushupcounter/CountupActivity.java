@@ -104,7 +104,7 @@ public class CountupActivity extends AppCompatActivity implements SensorEventLis
 
     private void highScoreSetting(){
         prefHighScore2 = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME_2,MODE_PRIVATE);
-        highScore2 = prefHighScore2.getInt("highscore",0);
+        highScore2 = prefHighScore2.getInt("highscore",1);
         editorHighScore2 = prefHighScore2.edit();
         if(numberOfPushups > highScore2){
             highScore2= numberOfPushups;

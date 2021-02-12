@@ -49,7 +49,7 @@ public class SquatActivity extends AppCompatActivity {
         bottomNavigation();
         hamburgerToolbarActionBar();
         prefHighScoreSquat = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME,MODE_PRIVATE);
-        highScoreSquat = prefHighScoreSquat.getInt("squathighscore",0);
+        highScoreSquat = prefHighScoreSquat.getInt("squathighscore",1);
         recentSquatTextView = findViewById(R.id.squat_count_display);
         ImageButton refreshButton = findViewById(R.id.squat_refresh);
         refreshButton.setOnClickListener(v -> {numberOfSquat=0; recentSquatTextView.setText(String.valueOf(numberOfSquat));  });
@@ -70,29 +70,24 @@ public class SquatActivity extends AppCompatActivity {
                 case R.id.pushup_item:
                     Intent iPushup = new Intent(getApplicationContext(), MainActivity.class);
                     iPushup.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    iPushup.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(iPushup);
                     return true;
                 case R.id.squat_item:
                     Intent iSquat = new Intent(getApplicationContext(), SquatActivity.class);
                     iSquat.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    iSquat.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(iSquat);
+                    return true;
                 case R.id.more_item:
                     Toast.makeText(getApplicationContext(),"more settings",Toast.LENGTH_SHORT).show();
-
+                    return true;
             }
             return true;
         });
     }
 
     private void displayHighScore() {
-        SharedPreferences prefIsFirstRun = getSharedPreferences("com.parmu.pushupcounter.isfirstrun", MODE_PRIVATE);
-        boolean isFirstRun = prefIsFirstRun.getBoolean("isfirstrunforsquat", true);
-        if (isFirstRun) {
-            SharedPreferences.Editor editorIsFirstRun = prefIsFirstRun.edit();
-            editorIsFirstRun.putBoolean("isfirstrunforsquat", false).apply();
-        }
-
-        if(!isFirstRun) {
             if (numberOfSquat >= highScoreSquat) {
                 final KonfettiView konfettiView = findViewById(R.id.view_konfetti);
                 konfettiView.build()
@@ -107,7 +102,6 @@ public class SquatActivity extends AppCompatActivity {
                         .streamFor(300, 3000L);
                 openDialog();
             }
-        }
     }
     public void openDialog(){
         DialogHighScore dialog = new DialogHighScore();
@@ -142,7 +136,7 @@ public class SquatActivity extends AppCompatActivity {
     private void hamburgerToolbarActionBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Squats Counter");
+        getSupportActionBar().setTitle("Squats Counter");
         toolbar.setBackgroundColor(getResources().getColor(R.color.purple_shade));
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);

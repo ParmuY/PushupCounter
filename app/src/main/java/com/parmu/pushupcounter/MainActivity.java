@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity{
         admobBanner();
         hamburgerToolbarActionBar();
         prefHighScore = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME,MODE_PRIVATE);
-        highScore = prefHighScore.getInt("highscore",0);
+        highScore = prefHighScore.getInt("highscore",1);
         recentPushupsTextView = findViewById(R.id.text_view_count_display);
         ImageButton refreshButton = findViewById(R.id.button_refresh);
         refreshButton.setOnClickListener(v -> {numberOfPushups=0; recentPushupsTextView.setText(String.valueOf(numberOfPushups));  });
@@ -96,14 +96,6 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
     private void displayHighScore() {
-        SharedPreferences prefIsFirstRun = getSharedPreferences("com.parmu.pushupcounter.isfirstrun", MODE_PRIVATE);
-        boolean isFirstRun = prefIsFirstRun.getBoolean("isfirstrun", true);
-        if (isFirstRun) {
-            SharedPreferences.Editor editorIsFirstRun = prefIsFirstRun.edit();
-            editorIsFirstRun.putBoolean("isfirstrun", false).apply();
-        }
-
-        if(!isFirstRun) {
             if (numberOfPushups >= highScore) {
                 final KonfettiView konfettiView = findViewById(R.id.view_konfetti);
                 konfettiView.build()
@@ -118,7 +110,6 @@ public class MainActivity extends AppCompatActivity{
                         .streamFor(300, 3000L);
                         openDialog();
             }
-        }
     }
     public void openDialog(){
         DialogHighScore dialog = new DialogHighScore();
@@ -178,22 +169,20 @@ public class MainActivity extends AppCompatActivity{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.pushup_item:
-                        item.setChecked(true);
-                        item.setEnabled(true);
                         Intent iPushup = new Intent(getApplicationContext(), MainActivity.class);
                         iPushup.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        iPushup.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(iPushup);
                         return true;
                     case R.id.squat_item:
-                        item.setChecked(true);
                         Intent iSquat = new Intent(getApplicationContext(), SquatActivity.class);
                         iSquat.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        iSquat.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(iSquat);
+                        return true;
                     case R.id.more_item:
-                        item.setChecked(true);
                         Toast.makeText(getApplicationContext(),"more settings",Toast.LENGTH_SHORT).show();
-
-
+                        return true;
                 }
                 return true;
             }

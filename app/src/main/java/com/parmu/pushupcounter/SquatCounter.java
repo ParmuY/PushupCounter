@@ -136,7 +136,7 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
 
         private void highScoreSetting(){
         prefHighScoreSquat = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME_2,MODE_PRIVATE);
-        highScoreSquat = prefHighScoreSquat.getInt("squathighscore",0);
+        highScoreSquat = prefHighScoreSquat.getInt("squathighscore",1);
         editorHighScoreSquat = prefHighScoreSquat.edit();
         if(numberOfSquat > highScoreSquat){
             highScoreSquat= numberOfSquat;
