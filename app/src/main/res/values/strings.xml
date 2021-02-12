@@ -6,9 +6,14 @@
     <string name="rate_app">Rate app</string>
     <string name="share_app">Share</string>
 
-    <string name="admob_application_id">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="admob_banner_id_main_activity">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="admob_banner_id_squat_activity">ca-app-pub-3940256099942544/6300978111</string>
+<!--    id for testing-->
+<!--    <string name="admob_application_id">ca-app-pub-3940256099942544~3347511713</string>-->
+<!--    <string name="admob_banner_id_main_activity">ca-app-pub-3940256099942544/6300978111</string>-->
+<!--    <string name="admob_banner_id_squat_activity">ca-app-pub-3940256099942544/6300978111</string>-->
+
+    <string name="admob_application_id">ca-app-pub-7368351753880084~3503737331</string>
+    <string name="admob_banner_id_main_activity">ca-app-pub-7368351753880084/5782533857</string>
+    <string name="admob_banner_id_squat_activity">ca-app-pub-7368351753880084/6904043836</string>
 
 
     <string name="pushup">Pushup</string>

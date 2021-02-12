@@ -61,7 +61,6 @@ public class CountupActivity extends AppCompatActivity implements SensorEventLis
             for (int i = 0; i < 1; i++) {
                 if (event.values[0] >= mProximitySensor.getMaximumRange()) {
                     //Far
-                    Toast.makeText(getApplicationContext(), "Far", Toast.LENGTH_SHORT).show();
                     numberOfPushups++;
                     liveCountTextView.setText(String.valueOf(numberOfPushups));
                 }
