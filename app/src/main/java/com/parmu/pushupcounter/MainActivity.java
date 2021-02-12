@@ -142,17 +142,14 @@ public class MainActivity extends AppCompatActivity{
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.share_drawer:
-                    menuItem.setChecked(false);
                     Toast.makeText(getApplicationContext(), "Share app", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawers();
                     return true;
                 case R.id.rate:
-                    menuItem.setChecked(false);
                     Toast.makeText(getApplicationContext(), "Rate", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawers();
                     return true;
                 case R.id.about:
-                    menuItem.setChecked(false);
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawers();
                     return true;
@@ -181,7 +178,7 @@ public class MainActivity extends AppCompatActivity{
                         startActivity(iSquat);
                         return true;
                     case R.id.more_item:
-                        Toast.makeText(getApplicationContext(),"more settings",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"More",Toast.LENGTH_SHORT).show();
                         return true;
                 }
                 return true;

@@ -80,7 +80,7 @@ public class SquatActivity extends AppCompatActivity {
                     startActivity(iSquat);
                     return true;
                 case R.id.more_item:
-                    Toast.makeText(getApplicationContext(),"more settings",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"More",Toast.LENGTH_SHORT).show();
                     return true;
             }
             return true;
@@ -157,17 +157,14 @@ public class SquatActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.share_drawer:
-                    menuItem.setChecked(true);
                     Toast.makeText(getApplicationContext(), "Share app", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawers();
                     return true;
                 case R.id.rate:
-                    menuItem.setChecked(true);
                     Toast.makeText(getApplicationContext(), "Rate", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawers();
                     return true;
                 case R.id.about:
-                    menuItem.setChecked(true);
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawers();
                     return true;
