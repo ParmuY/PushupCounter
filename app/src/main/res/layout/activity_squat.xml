@@ -11,6 +11,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SquatActivity">
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView_squat_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            app:adSize="BANNER"
+            app:adUnitId="@string/admob_banner_id_squat_activity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
      <include
         layout="@layout/toolbar_layout"
         android:id="@+id/toolbar" />
@@ -26,27 +38,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:layout_width="260dp"
-        android:layout_height="273dp"
-        android:layout_marginBottom="40dp"
-        android:src="@drawable/squat_img_300x416"
-        app:layout_constraintBottom_toTopOf="@+id/squat_count_display"
-        app:layout_constraintEnd_toEndOf="@+id/view_konfetti"
-        app:layout_constraintHorizontal_bias="0.41"
-        app:layout_constraintStart_toStartOf="@+id/view_konfetti" />
+        <ImageView
+            android:layout_width="260dp"
+            android:layout_height="273dp"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/squat_img_300x416"
+            app:layout_constraintBottom_toTopOf="@+id/squat_count_display"
+            app:layout_constraintEnd_toEndOf="@+id/view_konfetti"
+            app:layout_constraintHorizontal_bias="0.397"
+            app:layout_constraintStart_toStartOf="@+id/view_konfetti" />
 
-    <TextView
-        android:id="@+id/squat_count_display"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="999"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/start_squat_counter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/squat_count_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="999"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/start_squat_counter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/start_squat_counter"

@@ -4,16 +4,17 @@
 
     <group android:checkableBehavior="single">
     <item android:id="@+id/pushup_item"
+        android:checked="true"
         android:icon="@drawable/ic_pushup_vector"
-        android:title="Pushup"
-        app:showAsAction="always"/>
+        android:title="@string/pushup"
+        app:showAsAction="ifRoom"/>
     <item android:id="@+id/squat_item"
         android:icon="@drawable/ic_squatting_vector"
-        android:title="Squats"
-        app:showAsAction="always" />
+        android:title="@string/squats"
+        app:showAsAction="ifRoom" />
     <item android:id="@+id/more_item"
         android:icon="@drawable/ic_baseline_info"
-        android:title="More"
+        android:title="@string/more"
         app:showAsAction="ifRoom" />
     </group>
 </menu>

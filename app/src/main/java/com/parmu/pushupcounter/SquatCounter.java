@@ -1,6 +1,7 @@
 package com.parmu.pushupcounter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +37,10 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_squat_counter);
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Squat Counter");
+        toolbar.setBackgroundColor(getResources().getColor(R.color.purple_shade));
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         liveSquatCount = findViewById(R.id.squat_live_count);
         Button finishCountOfSquatButton = findViewById(R.id.squat_finish_counting);

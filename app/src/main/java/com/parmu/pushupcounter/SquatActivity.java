@@ -22,9 +22,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,11 +47,16 @@ public class SquatActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ActionBar actionBar;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_squat);
+        // Initialize the Mobile Ads SDK
+        MobileAds.initialize(this, initializationStatus -> {
+        });
         bottomNavigation();
+        admobBanner();
         hamburgerToolbarActionBar();
         prefHighScoreSquat = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME,MODE_PRIVATE);
         highScoreSquat = prefHighScoreSquat.getInt("squathighscore",1);
@@ -68,12 +78,14 @@ public class SquatActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.pushup_item:
+                    item.setChecked(true);
                     Intent iPushup = new Intent(getApplicationContext(), MainActivity.class);
                     iPushup.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     iPushup.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(iPushup);
                     return true;
                 case R.id.squat_item:
+                    item.setChecked(true);
                     Intent iSquat = new Intent(getApplicationContext(), SquatActivity.class);
                     iSquat.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     iSquat.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -125,18 +137,17 @@ public class SquatActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
-    @SuppressLint({"NonConstantResourceId", "UseCompatLoadingForDrawables"})
+    @SuppressLint({"NonConstantResourceId", "UseCompatLoadingForDrawables", "SetTextI18n"})
     private void hamburgerToolbarActionBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Squats Counter");
+        getSupportActionBar().setTitle("Squat Counter");
         toolbar.setBackgroundColor(getResources().getColor(R.color.purple_shade));
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationView);
@@ -146,7 +157,7 @@ public class SquatActivity extends AppCompatActivity {
         CircleImageView headerIcon = constraintLayoutHeader.findViewById(R.id.header_image_icon);
         headerIcon.setImageResource(R.drawable.squat_img_300x416);
         TextView headerTextView = constraintLayoutHeader.findViewById(R.id.header_text_view);
-        headerTextView.setText("Squats Counter");
+        headerTextView.setText("Squat Counter");
 
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -171,5 +182,15 @@ public class SquatActivity extends AppCompatActivity {
             }
             return true;
         });
+    }
+    private void admobBanner() {
+        mAdView = findViewById(R.id.adView_squat_activity);
+        //remove this code for release
+        MobileAds.setRequestConfiguration(
+                new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("1B17F2F74B21C1CC8F0D69FD617DFA0E"))
+                        .build());
+        //remove the code above when releasing
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 }

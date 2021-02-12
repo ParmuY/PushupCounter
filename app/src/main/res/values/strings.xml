@@ -5,7 +5,12 @@
     <string name="pushup_counter">PushUp Counter</string>
     <string name="rate_app">Rate app</string>
     <string name="share_app">Share</string>
-    <!--    <string name="admob_banner_id">ca-app-pub-7368351753880084/2538780659</string>-->
-    <string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="splash_instruction_mobile_placement">Tips: Place your phone below your chest or Head</string>
+
+    <string name="admob_banner_id_main_activity">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_id_squat_activity">ca-app-pub-3940256099942544/6300978111</string>
+
+
+    <string name="pushup">Pushup</string>
+    <string name="squats">Squats</string>
+    <string name="more">More</string>
 </resources>

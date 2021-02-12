@@ -166,12 +166,14 @@ public class MainActivity extends AppCompatActivity{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.pushup_item:
+                        item.setChecked(true);
                         Intent iPushup = new Intent(getApplicationContext(), MainActivity.class);
                         iPushup.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         iPushup.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(iPushup);
                         return true;
                     case R.id.squat_item:
+                        item.setChecked(true);
                         Intent iSquat = new Intent(getApplicationContext(), SquatActivity.class);
                         iSquat.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         iSquat.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

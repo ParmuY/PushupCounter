@@ -28,7 +28,6 @@ public class CountupActivity extends AppCompatActivity implements SensorEventLis
     SharedPreferences prefHighScore2;
     SharedPreferences.Editor editorHighScore2;
     int highScore2;
-    private Toolbar toolbar;
 
 
     @Override
@@ -36,7 +35,7 @@ public class CountupActivity extends AppCompatActivity implements SensorEventLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countup);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         liveCountTextView = findViewById(R.id.text_view_live_count);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
