@@ -186,9 +186,9 @@ public class SquatActivity extends AppCompatActivity {
     private void admobBanner() {
         mAdView = findViewById(R.id.adView_squat_activity);
         //remove this code for release
-//        MobileAds.setRequestConfiguration(
-//                new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("1B17F2F74B21C1CC8F0D69FD617DFA0E"))
-//                        .build());
+        MobileAds.setRequestConfiguration(
+                new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("1B17F2F74B21C1CC8F0D69FD617DFA0E"))
+                        .build());
         //remove the code above when releasing
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);

@@ -24,7 +24,7 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     private TextView liveSquatCount;
     private float pitch;
     Intent iFinishCountingOfSquat;
-    private float recentValueOfPitch= (float) 0.80;
+    private float recentValueOfPitch= (float) 0.95;
     private float[] mAccelerometerData = new float[3];
     private float[] mMagnetometerData = new float[3];
     final static String PREF_HIGH_SCORE_FILE_NAME_2 = "com.parmu.pushupcounter.HighScore";
@@ -85,12 +85,12 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
 
         float roll = orientationValues[2];
         //here start the main or important code
-        if(pitch<0.60 && recentValueOfPitch>0.60){
+        if(pitch<0.60 && recentValueOfPitch>0.90){
             numberOfSquat++;
             liveSquatCount.setText(String.valueOf(numberOfSquat));
             recentValueOfPitch = pitch;
         }
-        if(pitch > 0.60 && recentValueOfPitch < 0.60){
+        if(pitch > 0.90 && recentValueOfPitch < 0.60){
             recentValueOfPitch = pitch;
         }
 
