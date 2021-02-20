@@ -14,6 +14,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SquatCounter extends AppCompatActivity implements SensorEventListener {
 
@@ -32,6 +33,7 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     private SharedPreferences prefHighScoreSquat;
     private SharedPreferences.Editor editorHighScoreSquat;
     private int highScoreSquat;
+    private float mProximityData;
 
 
     @Override
@@ -58,6 +60,8 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
                 Sensor.TYPE_ACCELEROMETER);
         mSensorMagnetometer = mSensorManager.getDefaultSensor(
                 Sensor.TYPE_MAGNETIC_FIELD);
+        mSensorProximity = mSensorManager.getDefaultSensor(
+                Sensor.TYPE_PROXIMITY);
 
     }
 
@@ -71,6 +75,9 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
             case Sensor.TYPE_MAGNETIC_FIELD:
                 mMagnetometerData = sensorEvent.values.clone();
                 break;
+            case Sensor.TYPE_PROXIMITY:
+                mProximityData = sensorEvent.values[0];
+                break;
             default:
                 return;
         }
@@ -83,15 +90,17 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
         }
         float azimuth = orientationValues[0];
         pitch = Math.abs(orientationValues[1]);   //pitch
-
         float roll = orientationValues[2];
+
         //here start the main or important code
-        if(pitch<0.60 && recentValueOfPitch>0.90){
+        if(pitch<0.60 && recentValueOfPitch>0.90 && mProximityData < mSensorProximity.getMaximumRange()){
+
             numberOfSquat++;
             liveSquatCount.setText(String.valueOf(numberOfSquat));
             recentValueOfPitch = pitch;
+
         }
-        if(pitch > 0.90 && recentValueOfPitch < 0.60){
+        if(pitch > 0.90 && recentValueOfPitch < 0.60 && mProximityData < mSensorProximity.getMaximumRange()){
             recentValueOfPitch = pitch;
         }
 
@@ -110,6 +119,10 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
         }
         if (mSensorMagnetometer != null) {
             mSensorManager.registerListener(this, mSensorMagnetometer,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (mSensorProximity != null) {
+            mSensorManager.registerListener(this, mSensorProximity,
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
