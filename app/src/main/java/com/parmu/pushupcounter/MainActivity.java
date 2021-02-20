@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -64,8 +65,8 @@ public class MainActivity extends AppCompatActivity{
         refreshButton.setOnClickListener(v -> {numberOfPushups=0; recentPushupsTextView.setText(String.valueOf(numberOfPushups));  });
         Button startCounterButton = findViewById(R.id.button_start_counter);
         startCounterButton.setOnClickListener(v -> {
-            Intent iCountup = new Intent(MainActivity.this, CountupActivity.class);
-            startActivity(iCountup);
+            countDownTimerForPushup();
+
         });
         //numberof pushups got from countup activity as intentextra
         numberOfPushups =  getIntent().getIntExtra("numberofpushups",0);
@@ -186,6 +187,26 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             }
         });
+    }
+
+    private void countDownTimerForPushup() {
+        new CountDownTimer(4000,1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                TextView textViewCountDownTimerForPushup = findViewById(R.id.count_down_timer_pushup);
+                textViewCountDownTimerForPushup.setBackgroundColor(getResources().getColor(R.color.count_down_background));
+                textViewCountDownTimerForPushup.setText(String.valueOf(millisUntilFinished/1000));
+                if(millisUntilFinished/1000==0){
+                    textViewCountDownTimerForPushup.setText("Go");
+                }
+            }
+            @Override
+            public void onFinish() {
+                Intent iCountup = new Intent(MainActivity.this, CountupActivity.class);
+                startActivity(iCountup);
+            }
+        }.start();
     }
     @Override
     public void onResume(){

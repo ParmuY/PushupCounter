@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,7 @@ public class SquatActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private ActionBar actionBar;
     private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +60,7 @@ public class SquatActivity extends AppCompatActivity {
         bottomNavigation();
         admobBanner();
         hamburgerToolbarActionBar();
+
         prefHighScoreSquat = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME,MODE_PRIVATE);
         highScoreSquat = prefHighScoreSquat.getInt("squathighscore",1);
         recentSquatTextView = findViewById(R.id.squat_count_display);
@@ -65,8 +68,7 @@ public class SquatActivity extends AppCompatActivity {
         refreshButton.setOnClickListener(v -> {numberOfSquat=0; recentSquatTextView.setText(String.valueOf(numberOfSquat));  });
         Button startSitupCounter = findViewById(R.id.start_squat_counter);
         startSitupCounter.setOnClickListener(v -> {
-            Intent iStartSitupCounter = new Intent(SquatActivity.this, SquatCounter.class);
-            startActivity(iStartSitupCounter);
+            countDownTimerForPushup();
         });
         numberOfSquat =  getIntent().getIntExtra("numberofsquat",0);
         recentSquatTextView.setText(String.valueOf(numberOfSquat));
@@ -192,5 +194,24 @@ public class SquatActivity extends AppCompatActivity {
         //remove the code above when releasing
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+    }
+    private void countDownTimerForPushup() {
+        new CountDownTimer(4000,1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                TextView textViewCountDownTimerForSquat = findViewById(R.id.count_down_timer_squat);
+                textViewCountDownTimerForSquat.setBackgroundColor(getResources().getColor(R.color.count_down_background));
+                textViewCountDownTimerForSquat.setText(String.valueOf(millisUntilFinished/1000));
+                if(millisUntilFinished/1000==0){
+                    textViewCountDownTimerForSquat.setText("Go");
+                }
+            }
+            @Override
+            public void onFinish() {
+                Intent iCountup = new Intent(SquatActivity.this, SquatCounter.class);
+                startActivity(iCountup);
+            }
+        }.start();
     }
 }

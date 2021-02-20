@@ -65,6 +65,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/count_down_timer_pushup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#F84F4F"
+            android:textSize="150sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.496"
+            tools:ignore="RtlCompat" />
+
         <Button
             android:id="@+id/button_start_counter"
             android:layout_width="200dp"

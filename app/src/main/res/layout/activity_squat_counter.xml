@@ -23,7 +23,7 @@
         android:id="@+id/squat_live_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="999"
+        android:text="0"
         android:textSize="80sp"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
