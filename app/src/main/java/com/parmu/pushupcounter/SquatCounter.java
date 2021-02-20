@@ -20,6 +20,7 @@ public class SquatCounter extends AppCompatActivity implements SensorEventListen
     private SensorManager mSensorManager;
     private Sensor mSensorAccelerometer;
     private Sensor mSensorMagnetometer;
+    private Sensor mSensorProximity;
     private int numberOfSquat =-1;
     private TextView liveSquatCount;
     private float pitch;
