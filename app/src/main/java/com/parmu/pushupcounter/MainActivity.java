@@ -32,6 +32,8 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import nl.dionsegijn.konfetti.KonfettiView;
 import nl.dionsegijn.konfetti.models.Shape;
 import nl.dionsegijn.konfetti.models.Size;
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity{
     private NavigationView navigationView;
     private ActionBar actionBar;
     private AdView mAdView;
-    //adding the pitch in pushup counter
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
