@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity{
     private NavigationView navigationView;
     private ActionBar actionBar;
     private AdView mAdView;
+    //adding the pitch in pushup counter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
