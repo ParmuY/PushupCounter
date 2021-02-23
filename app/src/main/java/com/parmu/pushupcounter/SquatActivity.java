@@ -1,6 +1,5 @@
 package com.parmu.pushupcounter;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,14 +11,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +65,9 @@ public class SquatActivity extends AppCompatActivity {
         refreshButton.setOnClickListener(v -> {numberOfSquat=0; recentSquatTextView.setText(String.valueOf(numberOfSquat));  });
         Button startSitupCounter = findViewById(R.id.start_squat_counter);
         startSitupCounter.setOnClickListener(v -> {
+            if (highScoreSquat == 1) {
+                Toast.makeText(SquatActivity.this,"Please put phone in pocket",Toast.LENGTH_LONG).show();
+            }
             countDownTimerForPushup();
         });
         numberOfSquat =  getIntent().getIntExtra("numberofsquat",0);
@@ -118,7 +118,7 @@ public class SquatActivity extends AppCompatActivity {
             }
     }
     public void openDialog(){
-        DialogHighScore dialog = new DialogHighScore();
+        CustomDialog dialog = new CustomDialog();
         dialog.show(getSupportFragmentManager(),"tag highscore dialog");
         //close the dialog box after few seconds
         final Timer timerDismissDialog = new Timer ();

@@ -47,8 +47,8 @@ dependencies {
     // multidex feature
     def multidex_version="2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
-    //sweet dialog box
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+
 
 
 

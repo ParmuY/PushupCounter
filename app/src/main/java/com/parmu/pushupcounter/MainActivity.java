@@ -1,7 +1,7 @@
 package com.parmu.pushupcounter;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -11,9 +11,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -24,8 +24,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -33,7 +31,7 @@ import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import nl.dionsegijn.konfetti.KonfettiView;
 import nl.dionsegijn.konfetti.models.Shape;
 import nl.dionsegijn.konfetti.models.Size;
@@ -63,11 +61,15 @@ public class MainActivity extends AppCompatActivity{
         hamburgerToolbarActionBar();
         prefHighScore = getSharedPreferences(PREF_HIGH_SCORE_FILE_NAME,MODE_PRIVATE);
         highScore = prefHighScore.getInt("highscore",1);
+
         recentPushupsTextView = findViewById(R.id.text_view_count_display);
         ImageButton refreshButton = findViewById(R.id.button_refresh);
         refreshButton.setOnClickListener(v -> {numberOfPushups=0; recentPushupsTextView.setText(String.valueOf(numberOfPushups));  });
         Button startCounterButton = findViewById(R.id.button_start_counter);
         startCounterButton.setOnClickListener(v -> {
+            if (highScore == 1) {
+                Toast.makeText(MainActivity.this,"Please put phone in pocket",Toast.LENGTH_LONG).show();
+            }
             countDownTimerForPushup();
 
         });
@@ -116,13 +118,13 @@ public class MainActivity extends AppCompatActivity{
             }
     }
     public void openDialog(){
-        DialogHighScore dialog = new DialogHighScore();
+        CustomDialog dialog = new CustomDialog();
         dialog.show(getSupportFragmentManager(),"tag highscore dialog");
-        //close the dialog box after few seconds
         final Timer timerDismissDialog = new Timer ();
         timerDismissDialog.schedule(new TimerTask() {
             @Override
             public void run() {
+
                 dialog.dismiss();
                 timerDismissDialog.cancel();
             }
@@ -228,6 +230,8 @@ public class MainActivity extends AppCompatActivity{
             super.onDestroy();
         }
     }
+
+
 
 
 }
