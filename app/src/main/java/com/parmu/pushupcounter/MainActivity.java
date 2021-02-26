@@ -159,6 +159,10 @@ public class MainActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawers();
                     return true;
+                case R.id.feedback:
+                    drawerLayout.closeDrawers();
+                    feedbackIntent();
+                    return true;
             }
             return true;
         });
@@ -210,6 +214,15 @@ public class MainActivity extends AppCompatActivity{
             }
         }.start();
     }
+
+    private void feedbackIntent(){
+        Intent iFeedback = new Intent(Intent.ACTION_SEND);
+        iFeedback.setType("email/email");
+        iFeedback.putExtra(Intent.EXTRA_EMAIL,new String[] {"pramesh2151@gmail.com"});
+        iFeedback.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+        iFeedback.putExtra(Intent.EXTRA_TEXT,"Feedback:");
+        startActivity(Intent.createChooser(iFeedback,"Send Feedback via"));
+    }
     @Override
     public void onResume(){
         super.onResume();
@@ -230,8 +243,4 @@ public class MainActivity extends AppCompatActivity{
             super.onDestroy();
         }
     }
-
-
-
-
 }

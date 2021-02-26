@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MenuItem;
@@ -181,6 +182,10 @@ public class SquatActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawers();
                     return true;
+                case R.id.feedback:
+                    drawerLayout.closeDrawers();
+                    feedbackIntent();
+                    return true;
             }
             return true;
         });
@@ -213,5 +218,16 @@ public class SquatActivity extends AppCompatActivity {
                 startActivity(iCountup);
             }
         }.start();
+    }
+
+    @SuppressLint("IntentReset")
+    private void feedbackIntent() {
+        Intent iFeedback = new Intent(Intent.ACTION_SEND);
+        iFeedback.setType("text/email");
+        iFeedback.putExtra(Intent.EXTRA_EMAIL, new String[]{"pramesh2151@gmail.com"});
+        iFeedback.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+        iFeedback.putExtra(Intent.EXTRA_TEXT, " ");
+        startActivity(Intent.createChooser(iFeedback,"Send Feedback:"));
+
     }
 }
