@@ -91,14 +91,14 @@ public class CountupActivity extends AppCompatActivity implements SensorEventLis
         pitch = Math.abs(orientationValues[1]);   //pitch
 //        float roll = orientationValues[2];
 
-        if(pitch<0.15 && recentValueOfPitch>0.30 && mProximityData < mProximitySensor.getMaximumRange()){
+        if(pitch<0.20 && recentValueOfPitch>0.40 && mProximityData < mProximitySensor.getMaximumRange()){
 
             numberOfPushups++;
             liveCountTextView.setText(String.valueOf(numberOfPushups));
             recentValueOfPitch = pitch;
 
         }
-        if(pitch > 0.40 && recentValueOfPitch < 0.15 && mProximityData < mProximitySensor.getMaximumRange()){
+        if(pitch > 0.40 && recentValueOfPitch < 0.20 && mProximityData < mProximitySensor.getMaximumRange()){
             recentValueOfPitch = pitch;
         }
     }
