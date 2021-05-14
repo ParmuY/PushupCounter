@@ -1,7 +1,6 @@
 package com.parmu.pushupcounter;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -82,9 +81,9 @@ public class MainActivity extends AppCompatActivity{
     private void admobBanner() {
         mAdView = findViewById(R.id.adView);
         //remove this code for release
-        MobileAds.setRequestConfiguration(
-                new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("1B17F2F74B21C1CC8F0D69FD617DFA0E"))
-                        .build());
+//        MobileAds.setRequestConfiguration(
+//                new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("1B17F2F74B21C1CC8F0D69FD617DFA0E"))
+//                        .build());
         //remove the code above when releasing
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -94,10 +93,9 @@ public class MainActivity extends AppCompatActivity{
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -198,6 +196,7 @@ public class MainActivity extends AppCompatActivity{
     private void countDownTimerForPushup() {
         new CountDownTimer(4000,1000){
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onTick(long millisUntilFinished) {
                 TextView textViewCountDownTimerForPushup = findViewById(R.id.count_down_timer_pushup);

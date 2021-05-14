@@ -15,18 +15,20 @@
         tools:ignore="AllowBackup">
         <activity android:name=".SquatCounter"
             android:screenOrientation="portrait"
-            android:noHistory="true">
+            android:noHistory="true"
+            tools:ignore="LockedOrientationActivity">
         </activity>
 
         <activity android:name=".SquatActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
 
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -34,11 +36,16 @@
         <activity
             android:name=".CountupActivity"
             android:screenOrientation="portrait"
-            android:noHistory="true"/>
+            android:noHistory="true"
+            tools:ignore="LockedOrientationActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_application_id" />
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="face"/>
+
     </application>
 
 </manifest>
