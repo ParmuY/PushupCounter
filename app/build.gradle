@@ -48,13 +48,7 @@ dependencies {
     def multidex_version="2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
-    // mlkit
-    implementation 'com.google.firebase:firebase-ml-vision:'
-
-
-
-
-
+   
 }
 repositories {
     mavenCentral()
